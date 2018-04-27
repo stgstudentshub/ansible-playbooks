@@ -1,0 +1,4 @@
+---
+# defaults file for docker_engine
+docker_engine_cache_valid_time: 84600
+docker_engine_release_channel: stable

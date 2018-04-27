@@ -1,0 +1,17 @@
+---
+# tasks file for docker_engine
+
+- name: purge old docker packages
+  include: purge-apt.yml
+  when: ansible_pkg_mgr == "apt"
+
+- name: install docker ce for ubuntu
+  include: install-ubuntu.yml
+  when: ansible_distribution == "Ubuntu" and ansible_lsb.major_release|int >= 16
+
+- name: start docker service
+  service:
+    name: docker
+    enabled: yes
+    state: started
+  when: ansible_virtualization_type != "docker" # don't start docker in docker

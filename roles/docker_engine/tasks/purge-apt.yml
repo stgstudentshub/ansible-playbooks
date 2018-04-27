@@ -1,0 +1,13 @@
+---
+# Purge previous docker-ce versions
+
+- name: purge old docker packages
+  apt:
+    name: "{{ item }}"
+    state: absent
+    purge: yes
+  with_items:
+    - docker.io
+    - lxc-docker
+    - docker
+    - docker-engine
